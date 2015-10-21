@@ -105,13 +105,12 @@ public class test_bureau {
         // UF
         System.out.println(lit_cardio);
         UniteFonctionnelle uf1 = serv.newUniteFonctionnelle("Cardiologie",lit_cardio);
-        System.out.println("uf1:"+ uf1);
         UniteFonctionnelle uf2 = serv.newUniteFonctionnelle("Neurologie",lit_neuro);
-        System.out.println("uf2:"+ uf2);
         
         List<UniteFonctionnelle> res3 = serv.getAllUnitesFonctionnelles();
         assert(!res3.isEmpty());
         assert(res3.size()==2);
+        System.out.println("allUF:"+ res3);
         
         //Mouvement
         Mouvement mv1 = serv.newMouvement(ad1, lit1, uf1,new Date());
@@ -120,7 +119,13 @@ public class test_bureau {
         List<Mouvement> mouvs = serv.getAllMouvements();
         assert(!mouvs.isEmpty());
         assert(mouvs.size() == 2);
+        System.out.println("allMouv:"+ mouvs);
+        
+        Mouvement test_mouv = mouvs.get(1);
+        Lit test_lit = test_mouv.getLit();
+        System.out.println("Le lit est :"+ test_lit.getOccupe());
     }
+    
     /* MANQUE 
         Changement de statut du lit
         La vérification lit-Mouvement SINGER
