@@ -88,6 +88,10 @@ public class test_bureau {
         assert(!res.isEmpty());
         assert(res.size() == 2);
         
+        Admission ad_test = serv.getAdmissionByIep(1);
+        assertNotNull(ad_test);
+        System.out.println("Admission par IEP : "+ ad_test);
+        
         // Lit
         Lit lit1 = serv.newLit("Chambre 1");
         Lit lit2 = serv.newLit("Chambre 2");
@@ -101,7 +105,7 @@ public class test_bureau {
         List<Lit> lit_neuro = new ArrayList<>();
         lit_neuro.add(lit3);
         lit_neuro.add(lit4);
-        
+       
         // UF
         System.out.println(lit_cardio);
         UniteFonctionnelle uf1 = serv.newUniteFonctionnelle("Cardiologie",lit_cardio);
@@ -115,15 +119,27 @@ public class test_bureau {
         
         //Mouvement
         Mouvement mv1 = serv.newMouvement(ad1, lit1, uf1,new Date());
-        Mouvement mv2 = serv.newMouvement(ad2, lit4, uf2, new Date());
+        Mouvement mv2 = serv.newMouvement(ad2, lit4, uf2,new Date());
+        Mouvement mv3 = serv.newMouvement(ad1, lit1, uf2,new Date());
         
         List<Mouvement> mouvs = serv.getAllMouvements();
         assert(!mouvs.isEmpty());
-        assert(mouvs.size() == 2);
+        assert(mouvs.size() == 3);
+        
+        
+        // Cloturer Mouvement
+        Date date_cloture =  new Date();
+        serv.clotureMouvement(mv2, date_cloture);
+        
+        
+        // Liste mouvement selon admission
+        List<Mouvement> mouvs_test = serv.getMouvementByIep(ad_test);
+        assert(!mouvs.isEmpty());
+        System.out.println("Mouvement pour admission test :"+ mouvs_test);
+        
+        
     }
     /* MANQUE 
-        Changement de statut du lit
         La vérification lit-Mouvement SINGER
-        Creer une fonction qui détermine une date de sortie provisoire en fonction du type d'admission
     */
 }

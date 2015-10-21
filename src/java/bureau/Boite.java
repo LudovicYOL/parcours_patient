@@ -19,7 +19,7 @@ import org.hibernate.annotations.Cascade;
 
 /**
  *
- * @author Kurasawa
+ * @author Nicolas Singer <Nicolas.Singer@gmail.com>
  */
 @Entity
 public class Boite implements Serializable {

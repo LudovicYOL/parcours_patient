@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Kurasawa
+ * @author Nicolas Singer <Nicolas.Singer@gmail.com>
  */
 @Entity
 @XmlRootElement
