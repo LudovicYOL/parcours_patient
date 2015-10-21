@@ -20,9 +20,10 @@ import org.hibernate.Session;
 public class Services {
     
     EntityManagerFactory fact;
-
+    EntityManager em;
     public Services(EntityManagerFactory fact) {
         this.fact = fact;
+        this.em = fact.createEntityManager();
     }
     
     /* Admission */
@@ -70,6 +71,16 @@ public class Services {
         em.getTransaction().commit();
         em.close();
     }
+     public void updateAdmission(Admission ad, int ipp_, int type_){
+        ad.setIpp(ipp_);
+        ad.setType(type_);
+        
+        EntityManager em = fact.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(ad);
+        em.getTransaction().commit();
+        em.close();
+     }
      
     /* LIT */ 
     public Lit newLit (String room){
@@ -83,7 +94,16 @@ public class Services {
         em.close();
         return l;
     }
-    
+    public void updateLit(Lit l, String room_, boolean b){
+        l.setChambre(room_);
+        l.setOccupe(b);
+        
+        EntityManager em = fact.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(l);
+        em.getTransaction().commit();
+        em.close();
+     }
     public Lit getLitById(int id_lit) {
         EntityManager em = fact.createEntityManager();
 	Lit res = em.find( Lit.class, id_lit );
@@ -138,6 +158,22 @@ public class Services {
         em.getTransaction().commit();
         em.close();
         return m;
+    }
+    
+    public void updateMouvement (Mouvement m, Admission ad, Lit lit, UniteFonctionnelle uf, Date date_entree, Date date_sortie){
+        EntityManager em = fact.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(m);
+        m.setDate_entree(date_entree);
+        //Récuperer le type d'admission
+        m.setDate_sortie(date_sortie);
+        m.setAdmission(ad);
+        m.setLit(lit);
+        lit.setOccupe(Boolean.TRUE);
+        m.setUf(uf);
+        em.merge(m);
+        em.getTransaction().commit();
+        em.close();
     }
     
      public Mouvement getMouvementById(int id_mouv) {
