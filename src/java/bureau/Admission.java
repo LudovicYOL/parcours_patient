@@ -35,7 +35,7 @@ public class Admission implements Serializable {
     
     @Column
     private int type;
-    
+    // 1 pour hospitalisation progr, 2 pour urgence, 3 consultation externe
 
     // GETTER & SETTER
     public int getIep() {

@@ -6,11 +6,15 @@
 package bureau;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -27,7 +31,10 @@ public class UniteFonctionnelle implements Serializable {
     
     @Column
     private String nom;
-
+    
+    @Column
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    List<Lit> lits;
     
     public int getId_uf() {
         return id_uf;
@@ -45,6 +52,15 @@ public class UniteFonctionnelle implements Serializable {
         this.nom = nom;
     }
 
+    public List<Lit> getLits() {
+        return lits;
+    }
+
+    public void setLits(List<Lit> lits) {
+        this.lits = lits;
+    }
+    
+    
   
 
     @Override

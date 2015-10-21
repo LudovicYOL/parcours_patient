@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -32,13 +33,13 @@ public class Mouvement implements Serializable {
     @Column
     private Date date_sortie;
     
-    @Column
+    @OneToOne
     private Admission admission;
     
-    @Column
+    @OneToOne 
     private UniteFonctionnelle uf;
     
-    @Column
+    @OneToOne 
     private Lit lit;
 
     public int getId_mouv() {
