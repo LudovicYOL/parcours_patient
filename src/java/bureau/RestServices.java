@@ -31,6 +31,7 @@ public class RestServices {
         serv = new Services(DatabaseUtils.fact());
     }
 
+    
 
     @GET
     @Path("crayons/{id}")
@@ -78,7 +79,7 @@ public class RestServices {
         return Response.status(200).build();
     }
 
-   
+
     @GET
     @Path("admission/{iep}")
     @Produces("application/json")
@@ -111,12 +112,13 @@ public class RestServices {
         return Response.status(200).entity(ad).build();
     }
     
+    /*
     @DELETE
     @Path("admissions/{id}")
     public Response removeAdmission(@PathParam("id") int id) {
         serv.removeAdmission(id);
         return Response.status(200).build();
-    }
+    }*/
     
     @DELETE
     @Path("admissions/{id}")
@@ -180,8 +182,6 @@ public class RestServices {
     public UniteFonctionnelle getUniteFonctionnelleById(@PathParam("id") int id) {
         return serv.getUniteFonctionnelleById(id);
     }
-    
-    
     
     
 }
