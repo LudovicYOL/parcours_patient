@@ -4,6 +4,22 @@
  * and open the template in the editor.
  */
 
+angular.module('monApp', ['ngRoute','ngResource']);
 
+angular.module('monApp').config(['$routeProvider', function routeConfig($routeProvider) {
+    $routeProvider
+     .when('/', {
+        controller: "CrayonsController as ctrl",
+        templateUrl: 'listeCrayon.html'    
+    })
+     .when('/crayon/edit/:id', {
+        controller: "CrayonEditController as ctrl",
+        templateUrl: 'editCrayon.html'    
+    })
+     .when('/crayon/new', {
+        controller: "CrayonNewController as ctrl",
+        templateUrl: 'newCrayon.html'    
+    })
+    .otherwise({ redirectTo: '/'});
+}]);
 
-var bureauServices = angular.module('bureau', ['ngRoute','ngResource']);
