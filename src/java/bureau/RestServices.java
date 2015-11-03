@@ -80,6 +80,7 @@ public class RestServices {
     }
 
 
+    
     @GET
     @Path("admission/{iep}")
     @Produces("application/json")
@@ -112,25 +113,24 @@ public class RestServices {
         return Response.status(200).entity(ad).build();
     }
     
-    /*
     @DELETE
     @Path("admissions/{id}")
     public Response removeAdmission(@PathParam("id") int id) {
         serv.removeAdmission(id);
         return Response.status(200).build();
-    }*/
+    }
     
     @DELETE
-    @Path("admissions/{id}")
+    @Path("admissions")
     public Response deleteAllAdmissions() {
         serv.deleteAllAdmissions();
         return Response.status(200).build();
     }
     
     @GET
-    @Path("lit/{nomUF}")
+    @Path("UF/{nom}/lit")
     @Produces("application/json")
-    public List<Lit> getLitByUF(@PathParam("nomUF") String nomUF) {
+    public List<Lit> getLitByUF(@PathParam("nom") String nomUF) {
         return serv.getLitByUF(nomUF);
     }
     
@@ -140,14 +140,14 @@ public class RestServices {
     public List<Lit> getLits() {
         return serv.getAllLits();
     }
-    
+    /*//je foire
     @GET
-    @Path("lit/{id_lit}")
+    @Path("lit/{id}")
     @Produces("application/json")
-    public Lit getLitById(@PathParam("id_lit") int id_lit) {
-        return serv.getLitById(id_lit);
+    public Lit getLitById(@PathParam("id") int id) {
+        return serv.getLitById(id);
     }
-    
+    */
     @GET
     @Path("mouvements")
     @Produces("application/json")
@@ -161,14 +161,14 @@ public class RestServices {
     public Mouvement getMouvementById(@PathParam("id_mouv") int id_mouv) {
         return serv.getMouvementById(id_mouv);
     }
-    
+    /*
     @GET
     @Path("mouvement/{ad}")
     @Produces("application/json")
     public List<Mouvement> getMouvementByIep(@PathParam("ad") Admission ad) {
         return serv.getMouvementByIep(ad);
     }
-    
+    */
     @GET
     @Path("unitefonctionnelle")
     @Produces("application/json")
