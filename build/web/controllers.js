@@ -32,3 +32,18 @@ function($routeParams, Crayons, $location) {
     };
 }
 ]);
+
+
+
+angular.module('monApp').controller('AdmissionController', [ 'Admissions',
+    function (Admissions) {
+        this.admissions = Admissions.query();
+        this.delete = function (ad) {
+            // appel DELETE asynchrone au service web sur /crayons/{id}
+            //cr.$delete();
+            Crayons.delete(ad);
+            // remet à jour le tableau des crayons en suprimant l'élément effacé
+            this.admissions.splice(this.admissions.indexOf(ad), 1);
+        };
+    }
+]);

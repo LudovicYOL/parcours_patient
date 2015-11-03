@@ -6,3 +6,9 @@ angular.module('monApp').factory('Crayons', ['$resource', function($resource) {
     return $resource('/bureau/webresources/generic/crayons/:id', { id : '@id'} );
     
 }]);
+
+angular.module('monApp').factory('Admissions', ['$resource', function($resource) {
+        
+    return $resource('/bureau/webresources/generic/admission/:id', { id : '@id'} );
+    
+}]);
