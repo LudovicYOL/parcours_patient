@@ -273,7 +273,7 @@ public class Services {
         if(ad.getType()==2){m.setDate_sortie(null);}
         m.setAdmission(ad);
         lit.setOccupe(Boolean.TRUE);
-        em.persist(lit);
+        //em.persist(lit);
         m.setLit(lit);
        
         m.setUf(uf);
@@ -316,7 +316,7 @@ public class Services {
     }
     
     public List<Mouvement> getMouvementByIep(int iep){
-        TypedQuery<Mouvement> query = em.createQuery("SELECT m FROM Mouvement m WHERE m.admission_iep = :iep", Mouvement.class).setParameter("iep", iep);
+        TypedQuery<Mouvement> query = em.createQuery("SELECT m FROM Mouvement m WHERE m.admission.iep = :iep", Mouvement.class).setParameter("iep", iep);
         List<Mouvement> res = query.getResultList();
         return res;
     }

@@ -175,10 +175,10 @@ public class RestServices {
     @Path("mouvements")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces("application/json")
-    public Mouvement newMouvement(Admission ad, Lit l, UniteFonctionnelle uf, Date d ){
-        Mouvement mv = serv.newMouvement(ad, l, uf,d);
-        System.out.println("id_mouv:"+mv.getId_mouv());
-        return mv;
+    public Mouvement newMouvement(Mouvement mouv){
+        serv.newMouvement(mouv.getAdmission(), mouv.getLit(), mouv.getUf(), mouv.getDate_entree());
+        System.out.println("id_mouv:"+mouv.getId_mouv());
+        return mouv;
     }
     
     @GET
