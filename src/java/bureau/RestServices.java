@@ -120,6 +120,7 @@ public class RestServices {
         return Response.status(200).build();
     }
     
+    
     @DELETE
     @Path("admissions")
     public Response deleteAllAdmissions() {
