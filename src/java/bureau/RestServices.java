@@ -1,6 +1,7 @@
 
 package bureau;
 
+import java.util.Date;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -155,27 +156,38 @@ public class RestServices {
     public List<Mouvement> getMouvements() {
         return serv.getAllMouvements();
     }
-    
+    /*
     @GET
     @Path("mouvement/{id}")
     @Produces("application/json")
     public Mouvement getMouvementById(@PathParam("id_mouv") int id_mouv) {
         return serv.getMouvementById(id_mouv);
     }
-    /*
-    @GET
-    @Path("mouvement/{ad}")
-    @Produces("application/json")
-    public List<Mouvement> getMouvementByIep(@PathParam("ad") Admission ad) {
-        return serv.getMouvementByIep(ad);
-    }
     */
+    @GET
+    @Path("mouvements/{iep}")
+    @Produces("application/json")
+    public List<Mouvement> getMouvementByIep(@PathParam("iep") int iep) {
+        return serv.getMouvementByIep(iep);
+    }
+    
+    @POST
+    @Path("mouvements")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces("application/json")
+    public Mouvement newMouvement(Admission ad, Lit l, UniteFonctionnelle uf, Date d ){
+        Mouvement mv = serv.newMouvement(ad, l, uf,d);
+        System.out.println("id_mouv:"+mv.getId_mouv());
+        return mv;
+    }
+    
     @GET
     @Path("unitefonctionnelle")
     @Produces("application/json")
     public List<UniteFonctionnelle> getUFs() {
         return serv.getAllUnitesFonctionnelles();
     }
+    
     
     @GET
     @Path("unitefonctionnelle/{id}")

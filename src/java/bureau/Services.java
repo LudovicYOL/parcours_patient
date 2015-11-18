@@ -315,8 +315,8 @@ public class Services {
         return res;
     }
     
-    public List<Mouvement> getMouvementByIep(Admission ad){
-        TypedQuery<Mouvement> query = em.createQuery("SELECT m FROM Mouvement m WHERE m.admission = :ad", Mouvement.class).setParameter("ad", ad);
+    public List<Mouvement> getMouvementByIep(int iep){
+        TypedQuery<Mouvement> query = em.createQuery("SELECT m FROM Mouvement m WHERE m.admission_iep = :iep", Mouvement.class).setParameter("iep", iep);
         List<Mouvement> res = query.getResultList();
         return res;
     }

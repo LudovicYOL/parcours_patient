@@ -133,7 +133,7 @@ public class test_bureau {
         
         
         // Liste mouvement selon admission
-        List<Mouvement> mouvs_test = serv.getMouvementByIep(ad_test);
+        List<Mouvement> mouvs_test = serv.getMouvementByIep(ad_test.getIep());
         assert(!mouvs.isEmpty());
         System.out.println("Mouvement pour admission test :"+ mouvs_test);
         
