@@ -21,8 +21,12 @@ angular.module('monApp').config(['$routeProvider', function routeConfig($routePr
         templateUrl: 'newCrayon.html'    
     })
     .when('/admission/', {
-        controller: "AdmissionNewController as ctrl",
+        controller: "AdmissionController as ctrl",
         templateUrl: 'listeAdmission.html'    
+    })
+    .when('/admission/new', {
+        controller: "AdmissionNewController as ctrl",
+        templateUrl: 'newAdmission.html'    
     })
     .otherwise({ redirectTo: '/'});
 }]);

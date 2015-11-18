@@ -9,6 +9,6 @@ angular.module('monApp').factory('Crayons', ['$resource', function($resource) {
 
 angular.module('monApp').factory('Admissions', ['$resource', function($resource) {
         
-    return $resource('/bureau/webresources/generic/admission/:id', { id : '@id'} );
+    return $resource('/bureau/webresources/generic/admissions/:id', { id : '@id'} );
     
 }]);
