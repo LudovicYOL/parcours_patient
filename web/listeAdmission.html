@@ -5,11 +5,11 @@
         <th> IPP </th>
         <th> IEP </th>
         <th> TYPE </th>
-    <tr ng-repeat='ad in ctrl.admission'>
-        <td> {{ add.ipp }} </td>
-        <td> {{ add.iep }} </td>
-        <td> {{ add.type }} </td>
-        <td> <a ng-href="#/admission/edit/{{cr.iep}}"/> Editer </a>
+    <tr ng-repeat='ad in ctrl.admissions'>
+        <td> {{ ad.ipp }} </td>
+        <td> {{ ad.iep }} </td>
+        <td> {{ ad.type }} </td>
+        <td> <a ng-href="#/admission/edit/{{ad.iep}}"/> Editer </a>
         <td> <input type="button" value="delete" ng-click="ctrl.delete(ad)"/> 
     </tr>
  
