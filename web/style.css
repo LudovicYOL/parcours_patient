@@ -1,0 +1,42 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 18 nov. 2015, 09:53:36
+    Author     : lyol
+*/
+
+h1{
+    text-transform:uppercase;
+}
+
+.btn-primary a, .btn-primary a:hover{
+    color:white;
+    text-decoration:none;
+}
+
+#container{
+    width:900px;
+    margin:auto;
+}
+
+.ui-datepicker{background:white;}
+.ui-datepicker-header{padding:5px;}
+.ui-datepicker-calendar{margin: 10px;}
+
+.main_menu{
+    height: 50px;
+    margin:10px 0px;
+    padding:5px;
+}
+
+.main_menu button{
+    margin: 0 5px;
+}
+
+.main_container{
+    margin:10px 0px;
+    padding:5px;
+}

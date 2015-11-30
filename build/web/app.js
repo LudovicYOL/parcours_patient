@@ -8,19 +8,7 @@ angular.module('monApp', ['ngRoute','ngResource']);
 
 angular.module('monApp').config(['$routeProvider', function routeConfig($routeProvider) {
     $routeProvider
-     .when('/', {
-        controller: "CrayonsController as ctrl",
-        templateUrl: 'listeCrayon.html'    
-    })
-     .when('/crayon/edit/:id', {
-        controller: "CrayonEditController as ctrl",
-        templateUrl: 'editCrayon.html'    
-    })
-     .when('/crayon/new', {
-        controller: "CrayonNewController as ctrl",
-        templateUrl: 'newCrayon.html'    
-    })
-    .when('/admission/', {
+    .when('/', {
         controller: "AdmissionController as ctrl",
         templateUrl: 'listeAdmission.html'    
     })
@@ -28,6 +16,26 @@ angular.module('monApp').config(['$routeProvider', function routeConfig($routePr
         controller: "AdmissionNewController as ctrl",
         templateUrl: 'newAdmission.html'    
     })
+    .when('/admission/edit/:id', {
+        controller: "AdmissionEditController as ctrl",
+        templateUrl: 'editAdmission.html'    
+    })
+    .when('/mouvement/id/:id', {
+        controller: "MouvementController as ctrl",
+        templateUrl: 'listeMouvement.html'    
+    })
+    .when('/mouvement/new/:id', {
+        controller: "MouvementNewController as ctrl",
+        templateUrl: 'newMouvement.html'    
+    })
     .otherwise({ redirectTo: '/'});
 }]);
 
+/* .when('/crayon/edit/:id', {
+        controller: "CrayonEditController as ctrl",
+        templateUrl: 'editCrayon.html'    
+    })
+     .when('/crayon/new', {
+        controller: "CrayonNewController as ctrl",
+        templateUrl: 'newCrayon.html'    
+    }) */

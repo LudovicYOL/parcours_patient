@@ -6,15 +6,16 @@
             <file>file:/C:/Logiciel/git/parcours_patient/web/index.html</file>
             <file>file:/C:/Logiciel/git/parcours_patient/web/listeAdmission.html</file>
             <file>file:/C:/Logiciel/git/parcours_patient/src/java/bureau/Admission.java</file>
-            <file>file:/C:/Logiciel/git/parcours_patient/web/META-INF/context.xml</file>
             <file>file:/C:/Logiciel/git/parcours_patient/src/java/bureau/RestServices.java</file>
             <file>file:/C:/Logiciel/git/parcours_patient/web/newAdmission.html</file>
-            <file>file:/C:/Logiciel/git/parcours_patient/web/style.css</file>
             <file>file:/C:/Logiciel/git/parcours_patient/web/listeMouvement.html</file>
+            <file>file:/C:/Logiciel/git/parcours_patient/web/style.css</file>
+            <file>file:/C:/Logiciel/git/parcours_patient/src/java/bureau/Services.java</file>
             <file>file:/C:/Logiciel/git/parcours_patient/web/services.js</file>
             <file>file:/C:/Logiciel/git/parcours_patient/web/newCrayon.html</file>
-            <file>file:/C:/Logiciel/git/parcours_patient/web/editCrayon.html</file>
+            <file>file:/C:/Logiciel/git/parcours_patient/web/newMouvement.html</file>
             <file>file:/C:/Logiciel/git/parcours_patient/web/controllers.js</file>
+            <file>file:/C:/Logiciel/git/parcours_patient/web/moment.js</file>
             <file>file:/C:/Logiciel/git/parcours_patient/web/app.js</file>
             <file>file:/C:/Logiciel/git/parcours_patient/web/listeCrayon.html</file>
         </group>

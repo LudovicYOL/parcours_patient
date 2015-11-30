@@ -261,16 +261,20 @@ public class Services {
   
         m.setDate_entree(date_entree);
         //Récuperer le type d'admission
-        //si consultation externe (3) date entrée = date de sortie
-        if(ad.getType()==3){m.setDate_sortie(date_entree);}
+        
+        
         //si hospitalisation (1) date de sortie = date entrée + 3
+        System.out.println("test :"+ ad.getType());
         if(ad.getType()==1){
             Calendar calendar = Calendar.getInstance();
             calendar.set(Calendar.DAY_OF_WEEK, Calendar.DAY_OF_MONTH+3);
             m.setDate_sortie(calendar.getTime());
         }
         //si urgence (2) date de sortie = null
-        if(ad.getType()==2){m.setDate_sortie(null);}
+        else if(ad.getType()==2){m.setDate_sortie(null);}
+        //si consultation externe (3) date entrée = date de sortie
+        else{m.setDate_sortie(date_entree);}
+        
         m.setAdmission(ad);
         lit.setOccupe(Boolean.TRUE);
         //em.persist(lit);
@@ -302,6 +306,13 @@ public class Services {
          em.persist(l);
          em.persist(m);
          em.getTransaction().commit();
+    }
+    
+    public void removeMouvement(int id_mouv) {
+        Mouvement mv = em.find( Mouvement.class, id_mouv );
+	em.getTransaction( ).begin( );
+        em.remove(mv);
+        em.getTransaction().commit();
     }
     
      public Mouvement getMouvementById(int id_mouv) {

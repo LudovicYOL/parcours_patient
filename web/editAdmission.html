@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+ <h3> Modifier admission {{ ctrl.iep }}</h3>
+
+<div class="main_menu">
+   <button class='btn btn-primary pull-right'><a ng-href="#/"> Retour </a><span class='glyphicon glyphicon-return'></span></button>
+</div>
+
+<div class="main_container">
+    <div style='width:400px'>
+        <form class="form-group" novalidate class="simple-form">
+            
+            <!-- Entrer l'IPP -->
+            <label for='ipp' class="control-label">IPP</label><input type="text" ng-model="ctrl.ad.ipp" class="form-control"/><br />
+            <!-- choisir type d'admission -->
+            <label for='type' class="control-label">TYPE</label>
+            <select ng-model="ctrl.ad.type" class="form-control">
+                <option value='1'>Hospitalisation Programmée</option>
+                <option value='2'>Urgences</option>
+                <option value='3'>Consultation Externe</option>
+            </select>
+            <br />
+            <!-- Bouton Enregistrer -->
+            <input type="submit" ng-click="ctrl.update()" value="Enregistrer" class="form-control"/>
+
+            <div ng-show="ctrl.ad.iep">
+                Nouvelle admission (IEP: {{ ctrl.ad.iep }}).
+            </div>
+        </form>
+    </div>
+</div>

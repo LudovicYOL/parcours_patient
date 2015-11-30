@@ -83,7 +83,7 @@ public class RestServices {
 
     
     @GET
-    @Path("admission/{iep}")
+    @Path("admissions/{iep}")
     @Produces("application/json")
     public Admission getAdmission(@PathParam("iep") int iep) {
         return serv.getAdmissionByIep(iep);
@@ -156,6 +156,7 @@ public class RestServices {
     public List<Mouvement> getMouvements() {
         return serv.getAllMouvements();
     }
+    
     /*
     @GET
     @Path("mouvement/{id}")
@@ -164,6 +165,7 @@ public class RestServices {
         return serv.getMouvementById(id_mouv);
     }
     */
+    
     @GET
     @Path("mouvements/{iep}")
     @Produces("application/json")
@@ -176,9 +178,17 @@ public class RestServices {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces("application/json")
     public Mouvement newMouvement(Mouvement mouv){
+        System.out.println("test"+ mouv.getAdmission());
         serv.newMouvement(mouv.getAdmission(), mouv.getLit(), mouv.getUf(), mouv.getDate_entree());
         System.out.println("id_mouv:"+mouv.getId_mouv());
         return mouv;
+    }
+    
+    @DELETE
+    @Path("mouvements/{iep}")
+    public Response removeMouvement(@PathParam("iep") int id_mouv) {
+        serv.removeMouvement(id_mouv);
+        return Response.status(200).build();
     }
     
     @GET

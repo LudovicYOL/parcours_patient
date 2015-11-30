@@ -1,19 +1,31 @@
 <!DOCTYPE html>
 
-<table>
-    <tr>
-        <th> IPP </th>
-        <th> IEP </th>
-        <th> TYPE </th>
-    <tr ng-repeat='ad in ctrl.admissions'>
-        <td> {{ ad.ipp }} </td>
-        <td> {{ ad.iep }} </td>
-        <td> {{ ad.type }} </td>
-        <td> <a ng-href="#/admission/edit/{{ad.iep}}"/> Editer </a>
-        <td> <input type="button" value="delete" ng-click="ctrl.delete(ad)"/> 
-    </tr>
- 
-    
-</table>
-   
-    <a ng-href="#/admission/new"/> Nouvelle admission </a>
+<h2>Liste des Admissions</h2>
+
+<div class="main_menu">
+    <p>
+        <input ng-model="searchValue" placeholder="Filtrer...">
+        <button class='btn btn-primary pull-right'><a ng-href="#/admission/new"> Nouvelle admission </a><span class='glyphicon glyphicon-add'></span></button>
+    </p>
+</div>
+
+<div class="main_container">
+    <table class="table table-condensed table-striped table-bordered">
+        <tr>
+            <th> IEP </th>
+            <th> IPP </th>
+            <th> Type d'admission </th>
+            <th> Accéder aux détails </th>
+            <th> Modifier </th>
+            <th> Supprimer </th>
+        <tr ng-repeat='ad in ctrl.admissions | filter: searchValue'>
+            <td> Admission n°{{ ad.iep }} </td>
+            <td> Patient n°{{ ad.ipp }} </td>
+            <td> {{ ctrl.type(ad.type) }} </td>
+            <td> <button class="btn btn-link"><a ng-href="#/mouvement/id/{{ad.iep}}"> Détail </a><span class="glyphicon glyphicon-circle-arrow-right"></span></button></td>
+            <td> <button class="btn btn-link"><a ng-href="#/admission/edit/{{ad.iep}}"> Modifier </a><span class="glyphicon glyphicon-pencil"></span></button></td>
+            <td> <button class='btn btn-danger' ng-click="ctrl.delete(ad)"> Supprimer <span class='glyphicon glyphicon-remove'></span></button> </td>
+        </tr>
+    </table>
+</div>  
+

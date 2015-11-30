@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<h2>Liste des Mouvement</h2>
+
+
+<div class='main_menu'>
+    <span>IEP : {{ ctrl.iep }}</span>
+    <button class='btn btn-primary pull-right'><a ng-href="#/"> Retour </a><span class='glyphicon glyphicon-return'></span></button>
+    <button class='btn btn-primary pull-right'><a ng-href="#/mouvement/new/{{ ctrl.iep }}">Nouveau mouvement</a><span class='glyphicon glyphicon-add'></span></button>
+</div>
+
+<div class='main_container'>
+    <table class="table table-condensed table-striped table-bordered">
+        <tr>
+            <th> ID </th>
+            <th> Date Entrée </th>
+            <th> Date Sortie </th>
+            <th> Service </th>
+            <th> Lit </th>
+            <th> Supprimer </th>
+        <tr ng-repeat='mv in ctrl.mouvements'>
+            <td> {{ mv.id_mouv }} </td>
+            <td> {{ ctrl.calendar(mv.date_entree) }} </td>
+            <td> {{ ctrl.calendar(mv.date_sortie) }} </td>
+            <td> {{ mv.uf.nom }} </td>
+            <td> {{ mv.lit.chambre }} - Lit n°{{ mv.lit.id_lit }} </td>
+            <td> <button class='btn btn-danger' ng-click="ctrl.delete(mv)"> Supprimer <span class='glyphicon glyphicon-remove'></span></button> </td>
+        </tr>
+    </table>
+</div>
