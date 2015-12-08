@@ -5,14 +5,29 @@
  */
 package bureau;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import org.hibernate.Session;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import java.io.FileWriter;
+import static java.lang.Integer.parseInt;
+import java.util.List;
+import org.jdom2.*;
+import org.jdom2.input.*;
+import org.jdom2.output.*;
+import org.jdom2.transform.*;
 
 /**
  *
@@ -28,7 +43,7 @@ public class Services {
         this.em = fact.createEntityManager();
     }
     
-     public void close() {
+    public void close() {
         em.close();
     }
     public void newCrayon(Crayon cr) {
@@ -154,7 +169,6 @@ public class Services {
         em.persist(ad);
         em.getTransaction().commit();
     }
-    
     public void removeAdmission(int id) {
        
         Admission ad = em.find( Admission.class, id );
@@ -163,7 +177,6 @@ public class Services {
         em.getTransaction().commit();
        
     }
-
     public void editAdmission(Admission ad) {
       
 	em.getTransaction( ).begin( );
@@ -171,42 +184,37 @@ public class Services {
         em.getTransaction().commit();
      
     }
-    
-    public Admission newAdmission(int ipp_, int type_){
+    public Admission newAdmission(int ipp_, int type_, int iep_){
         Admission a = new Admission();
         a.setIpp(ipp_);
         a.setType(type_);
-        
+        a.setIep(iep_);
         em.getTransaction().begin();
         em.persist(a);
         em.getTransaction().commit();
         return a;
     }
-    
     public Admission getAdmissionByIep(int iep) {
 	Admission res = em.find( Admission.class, iep );
         return res;
     }
-    
-     public List<Admission> getAdmissionByIpp(int ipp) {
+    public List<Admission> getAdmissionByIpp(int ipp) {
 	TypedQuery<Admission> query = em.createQuery("SELECT a FROM Admission a WHERE a.ipp = :ipp", Admission.class)
                 .setParameter("ipp",ipp);
         List<Admission> res = query.getResultList();
         return res;
     }
-    
-     public List<Admission> getAllAdmissions() {
+    public List<Admission> getAllAdmissions() {
 	TypedQuery<Admission> query = em.createQuery("SELECT a FROM Admission a", Admission.class);
         List<Admission> res = query.getResultList();
         return res;
     }
-     
-     public void deleteAllAdmissions() {
-        em.getTransaction( ).begin( );
+    public void deleteAllAdmissions() {
+        em.getTransaction().begin( );
         em.createQuery("DELETE FROM Admission").executeUpdate();
         em.getTransaction().commit();
     }
-     public void updateAdmission(Admission ad, int ipp_, int type_){
+    public void updateAdmission(Admission ad, int ipp_, int type_){
         ad.setIpp(ipp_);
         ad.setType(type_);
         em.getTransaction().begin();
@@ -233,20 +241,17 @@ public class Services {
 	Lit res = em.find( Lit.class, id_lit );
         return res;
     }
-    
-     public List<Lit> getLitByUF(String nomUF) {
+    public List<Lit> getLitByUF(String nomUF) {
 	TypedQuery<Lit> query = em.createQuery("SELECT u.lits FROM UniteFonctionnelle u WHERE u.nom = :nomUF", Lit.class)
                 .setParameter("nomUF",nomUF);
         List<Lit> res = query.getResultList();
         return res;
     }
-    
-     public List<Lit> getAllLits() {
+    public List<Lit> getAllLits() {
 	TypedQuery<Lit> query = em.createQuery("SELECT l FROM Lit l", Lit.class);
         List<Lit> res = query.getResultList();
         return res;
     }
-     
     public void deleteAllLits() {
         em.getTransaction( ).begin( );
         em.createQuery("DELETE FROM Lit").executeUpdate();
@@ -285,7 +290,6 @@ public class Services {
         em.getTransaction().commit();
         return m;
     }
-    
     public void updateMouvement (Mouvement m, Admission ad, Lit lit, UniteFonctionnelle uf, Date date_entree, Date date_sortie){
         em.getTransaction().begin();
         m.setDate_entree(date_entree);
@@ -297,7 +301,6 @@ public class Services {
         em.persist(m);
         em.getTransaction().commit();
     }
-    
     public void clotureMouvement(Mouvement m, Date date_sortie){
          em.getTransaction().begin();
          m.setDate_sortie(date_sortie);
@@ -307,39 +310,34 @@ public class Services {
          em.persist(m);
          em.getTransaction().commit();
     }
-    
     public void removeMouvement(int id_mouv) {
         Mouvement mv = em.find( Mouvement.class, id_mouv );
 	em.getTransaction( ).begin( );
         em.remove(mv);
         em.getTransaction().commit();
     }
-    
-     public Mouvement getMouvementById(int id_mouv) {
+    public Mouvement getMouvementById(int id_mouv) {
 	Mouvement res = em.find( Mouvement.class, id_mouv );
         return res;
     }
-      
-     public List<Mouvement> getAllMouvements() {
+    public List<Mouvement> getAllMouvements() {
 	TypedQuery<Mouvement> query = em.createQuery("SELECT m FROM Mouvement m", Mouvement.class);
         List<Mouvement> res = query.getResultList();
         return res;
     }
-    
     public List<Mouvement> getMouvementByIep(int iep){
         TypedQuery<Mouvement> query = em.createQuery("SELECT m FROM Mouvement m WHERE m.admission.iep = :iep", Mouvement.class).setParameter("iep", iep);
         List<Mouvement> res = query.getResultList();
         return res;
     }
-     
-     public void deleteAllMouvements() {
+    public void deleteAllMouvements() {
         em.getTransaction( ).begin( );
         em.createQuery("DELETE FROM Mouvement").executeUpdate();
         em.getTransaction().commit();
     }
   
     /* UF */
-     public UniteFonctionnelle newUniteFonctionnelle (String nom,List<Lit> lits){
+    public UniteFonctionnelle newUniteFonctionnelle (String nom,List<Lit> lits){
         UniteFonctionnelle uf = new UniteFonctionnelle();
         em.getTransaction().begin();
         uf.setNom(nom);
@@ -348,22 +346,100 @@ public class Services {
         em.getTransaction().commit();
         return uf;
     }
-    
-     public UniteFonctionnelle getUniteFonctionnelleById(int id_uf) {
+    public UniteFonctionnelle getUniteFonctionnelleById(int id_uf) {
 	UniteFonctionnelle res = em.find( UniteFonctionnelle.class, id_uf );
         return res;
     }
-     
-     public List<UniteFonctionnelle> getAllUnitesFonctionnelles() {
+    public List<UniteFonctionnelle> getAllUnitesFonctionnelles() {
 	TypedQuery<UniteFonctionnelle> query = em.createQuery("SELECT u FROM UniteFonctionnelle u", UniteFonctionnelle.class);
         List<UniteFonctionnelle> res = query.getResultList();
         return res;
     }
-     
-     public void deleteAllUniteFonctionnelles() {
+    public void deleteAllUniteFonctionnelles() {
         em.getTransaction( ).begin( );
         em.createQuery("DELETE FROM UniteFonctionnelle").executeUpdate();
         em.getTransaction().commit();
     }
     
+    /*Alomentation de la base de données*/
+    public void getAdmissionsFromFile (){
+         SAXBuilder builder = new SAXBuilder();
+         try{
+            //on liste et on parcours les fichiers pour trouver les .xml qui sont en ajout et en edit 
+            File repertoire = new File("C:\\Users\\areceveu");
+            System.out.println("new file");
+            String [] listefichiers;
+            int i;
+            System.out.println("int i string liste fichier");
+            listefichiers=repertoire.list();
+            System.out.println("repertoire.list()");
+            for(i=0;i<listefichiers.length;i++){
+                System.out.println("dans la boucle");
+                //si le fichier est en ajout
+                if(listefichiers[i].startsWith("new")){
+                    System.out.println("fichier new trouvé");
+                    Document doc = builder.build(""+repertoire+"\\"+listefichiers[i]);
+                    Element root = doc.getRootElement();
+                    Element admissionXML = root;
+                    int type=1;
+                    int ipp;
+                    int iep;
+                    ipp = parseInt(admissionXML.getChild("patient").getAttributeValue("ipp"));
+                    iep = parseInt(admissionXML.getAttributeValue("iep"));
+                    if(admissionXML.getChild("type").getText().startsWith("c"))
+                        type=3;
+                    if(admissionXML.getChild("type").getText().startsWith("h"))
+                        type=1;
+                    if(admissionXML.getChild("type").getText().startsWith("u"))
+                        type=2;
+                    newAdmission(ipp, type, iep);
+                    System.out.println("nouvelle admission ajoutée");
+                }
+                if(listefichiers[i].startsWith("update")){
+                    System.out.println("fichier en update trouvé");
+                    Document doc = builder.build(""+repertoire+"\\"+listefichiers[i]);
+                    Element root = doc.getRootElement();
+                    Element admissionXML = root;
+                    int type=1;
+                    int iep = parseInt(admissionXML.getAttributeValue("iep"));
+                    if(admissionXML.getChild("type").getText().startsWith("c"))
+                        type=3;
+                    if(admissionXML.getChild("type").getText().startsWith("h"))
+                        type=1;
+                    if(admissionXML.getChild("type").getText().startsWith("u"))
+                        type=2;
+                    if(getAdmissionByIep(iep)==null){
+                        System.out.println("Il n'y a pas d'admission avec cet IEP");
+                    }else{
+                        Admission ad = getAdmissionByIep(iep);
+                        ad.setType(type);
+                        editAdmission(ad);
+                        System.out.println("admission modifiée");
+                    }
+                    
+                }
+            }
+            /* 
+            Document doc = builder.build("C:\\Users\\areceveu\\admission.xml");
+            Element root = doc.getRootElement();
+            List<Element> admissions = root.getChildren("admission");
+            int type=1;
+            int ipp;
+            int iep;
+            for(Element admissionXML : admissions){
+                ipp = parseInt(admissionXML.getChild("patient").getAttributeValue("ipp"));
+                iep = parseInt(admissionXML.getAttributeValue("iep"));
+                if(admissionXML.getChild("type").getText().startsWith("c"))
+                    type=3;
+                if(admissionXML.getChild("type").getText().startsWith("h"))
+                    type=1;
+                if(admissionXML.getChild("type").getText().startsWith("u"))
+                    type=2;
+                newAdmission(ipp, type, iep);
+            }*/
+            
+         }catch(Exception e){
+             System.out.println("Erreur de lecture du fichier d'admission");
+         }
+     }
 }

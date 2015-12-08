@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+    <xs:element name="admission" type="AdmissionXML"/>
+    <xs:complexType name="AdmissionXML">
+        <xs:sequence>
+            <xs:element name="date_entree" type="xs:string"/>
+            <xs:element name="date_sortie" type="xs:string"/>
+            <xs:element name="type" type="xs:string"/> 
+            <xs:element name="patient" type="PatientXML"/>
+        </xs:sequence>
+        <xs:attribute name="iep" type="xs:positiveInteger"/>
+    </xs:complexType>
+    <xs:complexType name="PatientXML">
+         <xs:sequence>
+            <xs:element name="nom" type="xs:string" />
+            <xs:element name="prenom" type="xs:string" />
+        </xs:sequence>
+		<xs:attribute name="ipp" type="xs:positiveInteger"/>
+    </xs:complexType>
+</xs:schema>

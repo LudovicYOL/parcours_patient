@@ -38,11 +38,10 @@ public class test_bureau {
     
     static  void clean() {
         Services serv = new Services(DatabaseUtils.fact());
-        serv.deleteAllAdmissions();
-        serv.deleteAllLits();
-        serv.deleteAllUniteFonctionnelles();
         serv.deleteAllMouvements();
-        
+        serv.deleteAllUniteFonctionnelles();
+        serv.deleteAllLits();
+        serv.deleteAllAdmissions();
         List<Admission> res = serv.getAllAdmissions();
         assert(res.isEmpty());
     }
@@ -77,13 +76,8 @@ public class test_bureau {
         Services serv = new Services(DatabaseUtils.fact());
         
         // Admission
-        Admission ad1 = serv.newAdmission(1,1);
-        assertNotNull(ad1); 
-        Admission ad2 = serv.newAdmission(2,2);
-        assertNotNull(ad2); 
-        Admission ad3 = serv.newAdmission(1,3);
-        assertNotNull(ad3); 
-       
+        serv.getAdmissionsFromFile();
+        /*
         List<Admission> res = serv.getAdmissionByIpp(1);
         assert(!res.isEmpty());
         assert(res.size() == 2);
@@ -117,25 +111,27 @@ public class test_bureau {
         assert(!res3.isEmpty());
         assert(res3.size()==2);
         
-        //Mouvement
+        /*Mouvement
         Mouvement mv1 = serv.newMouvement(ad1, lit1, uf1,new Date());
         Mouvement mv2 = serv.newMouvement(ad2, lit4, uf2,new Date());
         Mouvement mv3 = serv.newMouvement(ad1, lit1, uf2,new Date());
         
-        List<Mouvement> mouvs = serv.getAllMouvements();
+       List<Mouvement> mouvs = serv.getAllMouvements();
         assert(!mouvs.isEmpty());
         assert(mouvs.size() == 3);
-        
-        
-        // Cloturer Mouvement
-        Date date_cloture =  new Date();
-        serv.clotureMouvement(mv2, date_cloture);
-        
         
         // Liste mouvement selon admission
         List<Mouvement> mouvs_test = serv.getMouvementByIep(ad_test.getIep());
         assert(!mouvs.isEmpty());
         System.out.println("Mouvement pour admission test :"+ mouvs_test);
+        
+        
+        // Cloturer Mouvement
+        Date date_cloture =  new Date();
+        serv.clotureMouvement(mv2, date_cloture);
+        */
+        
+        
         
         
     }
