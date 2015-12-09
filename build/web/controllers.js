@@ -118,4 +118,34 @@ angular.module('monApp').controller('MouvementController', [ '$routeParams', 'Mo
        $location.path( "/mouvement/id/"+ $routeParams.id );
    };
   
-}]);
+}])
+
+.controller('MouvementEditController', [ 'Mouvements', '$routeParams', '$location',
+    function(Mouvements, $routeParams, $location) {
+        this.iep = $routeParams.id;
+        this.mv = Mouvements.get({id: this.iep}); 
+        console.log(this.mv);
+        this.update = function() {
+            this.mv.date_entree = moment(this.date_entree).format();
+            this.mv.date_sortie = moment(this.date_sortie).format();
+            this.mv.admission = this.ad;
+            this.mv.$save();
+            $location.path("/mouvement/id/"+ this.iep);
+        };
+    }
+]);
+
+// MOUVEMENT
+angular.module('monApp').controller('LitsController', [ '$routeParams', 'Ufs',
+    function ($routeParams, Ufs) {
+        this.ufs = Ufs.query();
+       console.log(this.ufs);
+        this.occupation = function (occupe) {
+           if(occupe == false){
+               return 'free';
+           }else{
+               return 'busy';
+           }
+        };
+    }
+]);

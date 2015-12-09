@@ -40,3 +40,6 @@ h1{
     margin:10px 0px;
     padding:5px;
 }
+
+.free{background:#8bc34a !important;}
+.busy{background:#e57373 !important;}

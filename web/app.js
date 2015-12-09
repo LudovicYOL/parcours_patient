@@ -28,6 +28,14 @@ angular.module('monApp').config(['$routeProvider', function routeConfig($routePr
         controller: "MouvementNewController as ctrl",
         templateUrl: 'newMouvement.html'    
     })
+     .when('/mouvement/edit/:id', {
+        controller: "MouvementEditController as ctrl",
+        templateUrl: 'editMouvement.html'    
+    })
+    .when('/lits/', {
+        controller: "LitsController as ctrl",
+        templateUrl: 'occupationLits.html'    
+    })
     .otherwise({ redirectTo: '/'});
 }]);
 

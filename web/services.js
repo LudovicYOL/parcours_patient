@@ -1,5 +1,4 @@
 
-
 angular.module('monApp').factory('Crayons', ['$resource', function($resource) {
         
     //  voir https://docs.angularjs.org/api/ngResource/service/$resource pour la doc de cet objet
@@ -16,6 +15,12 @@ angular.module('monApp').factory('Admissions', ['$resource', function($resource)
 angular.module('monApp').factory('Mouvements', ['$resource', function($resource) {
         
     return $resource('/bureau/webresources/generic/mouvements/:id', { id : '@iep'} );
+    
+}]);
+
+angular.module('monApp').factory('Mouvement', ['$resource', function($resource) {
+        
+    return $resource('/bureau/webresources/generic/mouvement/:id', { id : '@id_mouv'} );
     
 }]);
 

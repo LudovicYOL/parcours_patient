@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<h2>Occupation des lits</h2>
+
+
+<div class='main_menu'>
+    <button class='btn btn-primary pull-right'><a ng-href="#/"> Retour </a><span class='glyphicon glyphicon-arrow-left'></span></button>
+</div>
+
+<div class='main_container'>
+   
+    <table class="table table-condensed table-striped table-bordered" ng-repeat="uf in ctrl.ufs">
+        <tr>
+           <th colspan="3">{{uf.nom}}</th>
+        </tr>
+        <tr ng-repeat="lit in uf.lits">
+            <td>{{lit.chambre}}</td>
+            <td >Lit n°{{lit.id_lit}}</td>
+            <td class="{{ ctrl.occupation(lit.occupe) }}"></td>
+        </tr>
+        
+     </table>
+</div>

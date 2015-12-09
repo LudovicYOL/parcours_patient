@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 
-<h2>Liste des Admissions</h2>
+<h2>Listes des Admissions</h2>
 
 <div class="main_menu">
     <p>
-        <input ng-model="searchValue" placeholder="Filtrer...">
-        <button class='btn btn-primary pull-right'><a ng-href="#/admission/new"> Nouvelle admission </a><span class='glyphicon glyphicon-add'></span></button>
+        <input ng-model="searchValue" placeholder="Filtrer par IEP...">
+        <button class='btn btn-primary pull-right'><a ng-href="#/admission/new"> Nouvelle admission </a><span class='glyphicon glyphicon-plus'></span></button>
+        <button class='btn btn-primary pull-right'><a ng-href="#/lits/"> Plan lit </a><span class='glyphicon glyphicon-th-list'></span></button>
     </p>
 </div>
 
@@ -18,7 +19,7 @@
             <th> Accéder aux détails </th>
             <th> Modifier </th>
             <th> Supprimer </th>
-        <tr ng-repeat='ad in ctrl.admissions | filter: searchValue'>
+        <tr ng-repeat='ad in ctrl.admissions | filter: {iep : searchValue}'>
             <td> Admission n°{{ ad.iep }} </td>
             <td> Patient n°{{ ad.ipp }} </td>
             <td> {{ ctrl.type(ad.type) }} </td>
