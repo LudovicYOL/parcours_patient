@@ -301,6 +301,12 @@ public class Services {
         em.persist(m);
         em.getTransaction().commit();
     }
+    
+    public void editMouvement (Mouvement m){
+        em.getTransaction().begin();
+        em.merge(m);
+        em.getTransaction().commit();
+    }
     public void clotureMouvement(Mouvement m, Date date_sortie){
          em.getTransaction().begin();
          m.setDate_sortie(date_sortie);

@@ -157,14 +157,14 @@ public class RestServices {
         return serv.getAllMouvements();
     }
     
-    /*
+    
     @GET
     @Path("mouvement/{id}")
     @Produces("application/json")
-    public Mouvement getMouvementById(@PathParam("id_mouv") int id_mouv) {
-        return serv.getMouvementById(id_mouv);
+    public Mouvement getMouvementById(@PathParam("id") int id) {
+        return serv.getMouvementById(id);
     }
-    */
+    
     
     @GET
     @Path("mouvements/{iep}")
@@ -182,6 +182,14 @@ public class RestServices {
         serv.newMouvement(mouv.getAdmission(), mouv.getLit(), mouv.getUf(), mouv.getDate_entree());
         System.out.println("id_mouv:"+mouv.getId_mouv());
         return mouv;
+    }
+    
+    @POST
+    @Path("mouvement/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response editMouvement(Mouvement m) {
+        serv.editMouvement(m);
+        return Response.status(200).entity(m).build();
     }
     
     @DELETE

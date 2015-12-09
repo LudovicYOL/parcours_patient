@@ -3,14 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/git_projet/parcours_patient/src/conf/persistence.xml</file>
             <file>file:/C:/git_projet/parcours_patient/src/java/bureau/Lit.java</file>
             <file>file:/C:/git_projet/parcours_patient/src/java/bureau/RestServices.java</file>
             <file>file:/C:/git_projet/parcours_patient/src/java/bureau/Admission.java</file>
             <file>file:/C:/git_projet/parcours_patient/test/bureauTest.java</file>
             <file>file:/C:/git_projet/parcours_patient/test/test_bureau.java</file>
             <file>file:/C:/git_projet/parcours_patient/src/java/bureau/Services.java</file>
-            <file>file:/C:/git_projet/parcours_patient/src/java/bureau/UniteFonctionnelle.java</file>
             <file>file:/C:/git_projet/parcours_patient/src/java/bureau/Mouvement.java</file>
         </group>
     </open-files>
