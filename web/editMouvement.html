@@ -2,11 +2,13 @@
 
 <h3> Modifier mouvement </h3>
 
-<p> IEP : {{ ctrl.iep }}</p>
+<p> IEP : {{ ctrl.mv.admission.iep }}</p>
 <p> ID_MOUV : {{ ctrl.id_mouv }}</p>
 
+{{ ctrl.mv }}
+
 <div class="main_menu">
-   <button class='btn btn-primary pull-right'><a ng-href="#/mouvements/id/{{ ctrl.iep }}"> Retour </a><span class='glyphicon glyphicon-arrow-left'></span></button>
+   <button class='btn btn-primary pull-right'><a ng-href="#/mouvements/id/{{ ctrl.mv.admission.iep }}"> Retour </a><span class='glyphicon glyphicon-arrow-left'></span></button>
 </div>
 
 <div class="main_container">
@@ -15,8 +17,8 @@
 
             <label for='uf' class="control-label">UF</label><select class="form-control" ng-options="uf.id_uf+' - '+uf.nom for uf in ctrl.ufs" ng-model="ctrl.mv.uf"></select><br />  
             <label for='ipp' class="control-label">Lit</label><select class="form-control" ng-options="lit.chambre+'- lit n°'+lit.id_lit for lit in ctrl.lits |filter:lit.occupe=='false'" ng-model="ctrl.mv.lit"></select><br />
-            <label for='ipp' class="control-label">Date entrée</label><input type="text" class="datepicker form-control" ng-model="ctrl.date_entree"><br/>
-            <label for='ipp' class="control-label">Date sortie</label><input type="text" class="datepicker form-control" ng-model="ctrl.date_sortie"><br/>
+            <label for='ipp' class="control-label">Date entrée</label><input type="text" class="datepicker form-control" value="{{ctrl.formatDate(ctrl.mv.date_entree)}}" ng-model="ctrl.date_entree"><br/>{{ctrl.formatDate(ctrl.mv.date_entree)}}
+            <label for='ipp' class="control-label">Date sortie</label><input type="text" class="datepicker form-control" value="{{ctrl.mv.date_sortie}}" ng-model="ctrl.date_sortie"><br/>
 
             <input class="form-control" type="submit" ng-click="ctrl.update()" value="Enregistrer mouvement" />
 
@@ -26,6 +28,6 @@
 
 <script>
     $(function() {
-      $( ".datepicker" ).datepicker();
+      $( ".datepicker" ).datepicker({dateFormat: 'dd/mm/yy'});
     });
 </script>

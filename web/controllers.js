@@ -120,11 +120,17 @@ angular.module('monApp').controller('MouvementController', [ '$routeParams', 'Mo
   
 }])
 
-.controller('MouvementEditController', [ 'Mouvements', '$routeParams', '$location',
-    function(Mouvements, $routeParams, $location) {
-        this.iep = $routeParams.id;
-        this.mv = Mouvements.get({id: this.iep}); 
-        console.log(this.mv);
+.controller('MouvementEditController', [ 'Mouvement', 'Lits', 'Ufs', '$routeParams', '$location',
+    function(Mouvement, Lits, Ufs, $routeParams, $location) {
+        this.id_mouv = $routeParams.id;
+        this.mv = Mouvement.get({id: this.id_mouv});
+        this.lits = Lits.query();
+        this.ufs = Ufs.query();
+        this.formatDate = function(date){
+            console.log('date :'+ date);
+            console.log(moment(date).format('DD/MM/YYYY'));
+            return moment(date).format('DD/MM/YYYY');
+        };
         this.update = function() {
             this.mv.date_entree = moment(this.date_entree).format();
             this.mv.date_sortie = moment(this.date_sortie).format();

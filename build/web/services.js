@@ -24,6 +24,12 @@ angular.module('monApp').factory('Mouvement', ['$resource', function($resource) 
     
 }]);
 
+angular.module('monApp').factory('Mouvement', ['$resource', function($resource) {
+        
+    return $resource('/bureau/webresources/generic/mouvement/:id', { id : '@id_mouv'} );
+    
+}]);
+
 angular.module('monApp').factory('Lits', ['$resource', function($resource) {
         
     return $resource('/bureau/webresources/generic/lits/:id', { id : '@id'} );
