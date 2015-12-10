@@ -20,6 +20,7 @@ import javax.persistence.TypedQuery;
 import org.hibernate.Session;
 import java.io.FileWriter;
 import static java.lang.Integer.parseInt;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import org.jdom2.*;
 import org.jdom2.input.*;
@@ -260,20 +261,25 @@ public class Services {
     public Mouvement newMouvement (Admission ad, Lit lit, UniteFonctionnelle uf, Date date_entree){
         Mouvement m = new Mouvement();
         em.getTransaction().begin();
-  
-        m.setDate_entree(date_entree);
         //Récuperer le type d'admission
-        
-        
+        m.setDate_entree(date_entree);
         //si hospitalisation (1) date de sortie = date entrée + 3
         System.out.println("test :"+ ad.getType());
         if(ad.getType()==1){
-            Calendar calendar = Calendar.getInstance();
-            calendar.set(Calendar.DAY_OF_WEEK, Calendar.DAY_OF_MONTH+3);
-            m.setDate_sortie(calendar.getTime());
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date_entree);
+            cal.add(Calendar.DATE, 3); //un nombre négatif décrémente la date
+            m.setDate_sortie(cal.getTime());
+            System.out.println("date de sortie  d'hospitalisation fixée à :"+ cal.getTime());
         }
-        //si urgence (2) date de sortie = null
-        else if(ad.getType()==2){m.setDate_sortie(null);}
+        //si urgence (2) date de sortie = date entrée + 10
+        else if(ad.getType()==2){
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date_entree);
+            cal.add(Calendar.DATE, 10); 
+            m.setDate_sortie(cal.getTime());
+            System.out.println("date de sortie  d'hospitalisation fixée à :"+ cal.getTime());
+        }
         //si consultation externe (3) date entrée = date de sortie
         else{m.setDate_sortie(date_entree);}
         
