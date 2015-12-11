@@ -188,9 +188,7 @@ public class RestServices {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces("application/json")
     public Mouvement newMouvement(Mouvement mouv){
-        System.out.println("test"+ mouv.getAdmission());
         serv.newMouvement(mouv.getAdmission(), mouv.getLit(), mouv.getUf(), mouv.getDate_entree());
-        System.out.println("id_mouv:"+mouv.getId_mouv());
         return mouv;
     }
     
@@ -202,10 +200,11 @@ public class RestServices {
         return Response.status(200).entity(m).build();
     }
     
-    @POST
-    @Path("mouvement/{id}/lit")
+    @GET
+    @Path("mouvement/cloture/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response cloturerMouvement(Mouvement m) {
+    public Response cloturerMouvement(@PathParam("id") int id) {
+        Mouvement m = serv.getMouvementById(id);
         serv.clotureMouvement(m);
         return Response.status(200).entity(m).build();
     }
@@ -214,6 +213,14 @@ public class RestServices {
     @Path("mouvements/{iep}")
     public Response removeMouvement(@PathParam("iep") int id_mouv) {
         serv.removeMouvement(id_mouv);
+        return Response.status(200).build();
+    }
+    
+    @GET
+    @Path("lit/changeStatut/{id}")
+    public Response changeStatut(@PathParam("id") int id) {
+        Lit lit = serv.getLitById(id);
+        serv.changeStatutLit(lit);
         return Response.status(200).build();
     }
     
@@ -232,5 +239,10 @@ public class RestServices {
         return serv.getUniteFonctionnelleById(id);
     }
     
-    
+    @GET
+    @Path("/updateFromFile")
+    public Response updateFromFile(){
+        serv.getAdmissionsFromFile();
+        return Response.status(200).build();
+    }
 }

@@ -43,3 +43,6 @@ h1{
 
 .free{background:#8bc34a !important;}
 .busy{background:#e57373 !important;}
+
+.occupation_marker{width:50px;}
+.occupation_marker > button > span{color:white !important;}

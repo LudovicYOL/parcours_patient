@@ -331,6 +331,18 @@ public class Services {
         em.remove(mv);
         em.getTransaction().commit();
     }
+    
+     public void changeStatutLit(Lit lit) {
+	em.getTransaction( ).begin( );
+        if(lit.getOccupe()){
+            lit.setOccupe(Boolean.FALSE);
+        }else{
+            lit.setOccupe(Boolean.TRUE);
+        }
+        em.merge(lit);
+        em.getTransaction().commit();
+    }
+    
     public Mouvement getMouvementById(int id_mouv) {
 	Mouvement res = em.find( Mouvement.class, id_mouv );
         return res;

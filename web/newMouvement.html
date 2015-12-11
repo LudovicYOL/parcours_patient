@@ -13,7 +13,7 @@
 
             <label for='uf' class="control-label">UF</label><select class="form-control" ng-options="uf.id_uf+' - '+uf.nom for uf in ctrl.ufs" ng-model="ctrl.mv.uf"></select><br />  
             <label for='ipp' class="control-label">Lit</label><select class="form-control" ng-options="lit.chambre+'- lit n°'+lit.id_lit for lit in ctrl.lits |filter:lit.occupe=='false'" ng-model="ctrl.mv.lit"></select><br />
-            <label for='ipp' class="control-label">Date entrée</label><input type="text" class="datepicker form-control" ng-model="ctrl.date"><br/>
+            <label for='ipp' class="control-label">Date entrée</label><input type="text" class="datepicker form-control" ng-model="ctrl.mv.date_entree"><br/>
 
 
             <input class="form-control" type="submit" ng-click="ctrl.update()" value="Enregistrer mouvement" />
@@ -24,6 +24,6 @@
 
 <script>
     $(function() {
-      $( ".datepicker" ).datepicker({dateFormat: 'dd/mm/yy'});
+      $( ".datepicker" ).datepicker();
     });
 </script>
