@@ -20,8 +20,10 @@ import javax.persistence.TypedQuery;
 import org.hibernate.Session;
 import java.io.FileWriter;
 import static java.lang.Integer.parseInt;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 import org.jdom2.*;
 import org.jdom2.input.*;
 import org.jdom2.output.*;
@@ -363,6 +365,16 @@ public class Services {
 	UniteFonctionnelle res = em.find( UniteFonctionnelle.class, id_uf );
         return res;
     }
+    public UniteFonctionnelle getUniteFontionnelleByNom(String nom){
+        UniteFonctionnelle res = new UniteFonctionnelle();
+        List<UniteFonctionnelle> lite_uf = getAllUnitesFonctionnelles();
+        for(UniteFonctionnelle uf : lite_uf){
+            if(nom.equals(uf.getNom())){
+                res=uf;
+            }
+        }
+        return res;
+    }
     public List<UniteFonctionnelle> getAllUnitesFonctionnelles() {
 	TypedQuery<UniteFonctionnelle> query = em.createQuery("SELECT u FROM UniteFonctionnelle u", UniteFonctionnelle.class);
         List<UniteFonctionnelle> res = query.getResultList();
@@ -435,19 +447,27 @@ public class Services {
                     System.out.println("fichier new trouvé");
                     Document doc = builder.build(""+repertoire+"\\"+listefichiers[i]);
                     Element root = doc.getRootElement();
-                    Element admissionXML = root;
-                    int type=1;
+                    Element mouvementXML = root;
+                    String service = "Cardiologie" ;
                     int ipp;
                     int iep;
-                    ipp = parseInt(admissionXML.getChild("patient").getAttributeValue("ipp"));
-                    iep = parseInt(admissionXML.getAttributeValue("iep"));
-                    if(admissionXML.getChild("type").getText().startsWith("c"))
-                        type=3;
-                    if(admissionXML.getChild("type").getText().startsWith("h"))
-                        type=1;
-                    if(admissionXML.getChild("type").getText().startsWith("u"))
-                        type=2;
-                    newAdmission(ipp, type, iep);
+                    Lit lit = new Lit();
+                    String date_entree = mouvementXML.getChild("date_entree").getValue();
+                    DateFormat format = new SimpleDateFormat("YYYY-MM-DD", Locale.ENGLISH);
+                    Date date = format.parse(date_entree);
+                    ipp = parseInt(mouvementXML.getChild("ipp").getValue());
+                    iep = parseInt(mouvementXML.getChild("iep").getValue());
+                    if(mouvementXML.getChild("service").getText().endsWith("2"))
+                        service="Radio 2";
+                    if(mouvementXML.getChild("service").getText().endsWith("1"))
+                        service="Radio 1";
+                    List<Lit> liste_lits = getLitByUF(service);
+                    for(Lit buff_lit : liste_lits){
+                        if(!buff_lit.getOccupe()){
+                            lit=buff_lit;
+                        }
+                    }
+                    newMouvement(getAdmissionByIep(iep), lit ,getUniteFontionnelleByNom(service), date);
                     System.out.println("nouvelle admission ajoutée");
                 }
             }

@@ -14,7 +14,7 @@ and open the template in the editor.
             <xs:element name="iep" type="xs:positiveInteger"/>
             <xs:element name="ipp" type="xs:positiveInteger"/>
             <xs:element name="service" type="xs:string"/>
-			<xs:element name="date_entree" type="xs:string"/>
+	    <xs:element name="date_entree" type="xs:string"/>
         </xs:sequence>
    </xs:complexType>
 </xs:schema>
