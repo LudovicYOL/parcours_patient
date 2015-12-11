@@ -316,9 +316,8 @@ public class Services {
         em.merge(m);
         em.getTransaction().commit();
     }
-    public void clotureMouvement(Mouvement m, Date date_sortie){
+    public void clotureMouvement(Mouvement m){
          em.getTransaction().begin();
-         m.setDate_sortie(date_sortie);
          Lit l = m.getLit();
          l.setOccupe(Boolean.FALSE);
          em.persist(l);

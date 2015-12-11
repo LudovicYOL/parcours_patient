@@ -132,8 +132,7 @@ public class test_bureau {
         
         
         // Cloturer Mouvement
-        Date date_cloture =  new Date();
-        serv.clotureMouvement(mv1, date_cloture);
+        //serv.clotureMouvement(mv1);
         
         
         

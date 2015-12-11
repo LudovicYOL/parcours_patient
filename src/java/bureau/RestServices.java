@@ -201,7 +201,15 @@ public class RestServices {
         serv.editMouvement(m);
         return Response.status(200).entity(m).build();
     }
-    
+    /* je foire
+    @POST
+    @Path("mouv/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response cloturerMouvement(Mouvement m) {
+        serv.clotureMouvement(m);
+        return Response.status(200).entity(m).build();
+    }
+    */
     @DELETE
     @Path("mouvements/{iep}")
     public Response removeMouvement(@PathParam("iep") int id_mouv) {
