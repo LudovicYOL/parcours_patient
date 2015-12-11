@@ -35,8 +35,8 @@ function($routeParams, Crayons, $location) {
 
 
 // ADMISSION
-angular.module('monApp').controller('AdmissionController', [ 'Admissions', '$location',
-    function (Admissions, $location) {
+angular.module('monApp').controller('AdmissionController', [ 'Admissions', '$window','UpdateFromFile',
+    function (Admissions, $window, UpdateFromFile) {
         this.admissions = Admissions.query();
         this.delete = function (ad) {
             // appel DELETE asynchrone au service web sur /crayons/{id}
@@ -60,91 +60,95 @@ angular.module('monApp').controller('AdmissionController', [ 'Admissions', '$loc
 
             return type;
         };   
+        
+        this.moulinette = function(){
+            this.reponse = UpdateFromFile.get();
+            $window.location.reload();
+        }
     }
 ])
 
-.controller('AdmissionNewController', [ 'Admissions',
-   function(Admissions) {
+.controller('AdmissionNewController', [ 'Admissions','$window',
+   function(Admissions,$window) {
     this.ad = new Admissions();
     this.update = function() { 
         // appel POST asynchrone au service web sur /crayons
        this.ad.$save();
-       //$location.path( "/admission" );
+       $window.location.href = '/bureau/#/';
    };
 }])
 
 
-.controller('AdmissionEditController', [ 'Admissions', '$routeParams', '$location',
-    function(Admissions, $routeParams, $location) {
+.controller('AdmissionEditController', [ 'Admissions', '$routeParams', '$window',
+    function(Admissions, $routeParams, $window) {
         this.iep = $routeParams.id;
         this.ad = Admissions.get({id: $routeParams.id}); 
         this.update = function() {
             // appel POST asynchrone au service web sur /crayons/{id} 
             this.ad.$save();
-            $location.path("/");
+            $window.location.href = '/bureau/#/';
         };
     }
 ]);
 
 
 // MOUVEMENT
-angular.module('monApp').controller('MouvementController', [ '$routeParams', 'Mouvements',
-    function ($routeParams, Mouvements) {
+angular.module('monApp').controller('MouvementController', [ '$routeParams', 'Mouvements', 'ClotureMouvement',
+    function ($routeParams, Mouvements, ClotureMouvement){
         this.iep = $routeParams.id;
         this.mouvements = Mouvements.query({id: this.iep});
         this.delete = function (mv) {
             mv.$delete({id:mv.id_mouv});
             this.mouvements.splice(this.mouvements.indexOf(mv), 1);
         };
-        
+    
         this.calendar = function (date) {
-           return  moment(date).format('DD/MM/YYYY hh:mm:ss');
+           return  moment(date).format('DD/MM/YYYY');
         };
     }
 ])
 
-.controller('MouvementNewController', [ 'Mouvements', 'Admissions', 'Lits', 'Ufs', '$routeParams', '$location',
-   function(Mouvements,Admissions,Lits,Ufs,$routeParams,$location) {
+.controller('MouvementNewController', [ 'Mouvements', 'Admissions', 'Lits', 'Ufs', '$routeParams', '$window', 'ChangerStatutLit',
+   function(Mouvements,Admissions,Lits,Ufs,$routeParams,$window, ChangerStatutLit) {
     this.iep = $routeParams.id;
     this.ad = Admissions.get({id: $routeParams.id});
     this.lits = Lits.query();
     this.ufs = Ufs.query();
-    this.date = new Date();
-    this.mv = new Mouvements ();
+    this.mv = new Mouvements();
     this.update = function() {
-       this.mv.date_entree = moment(this.date).format();
-       this.mv.admission = this.ad;
-       this.mv.$save();
-       $location.path( "/mouvement/id/"+ $routeParams.id );
+        ChangerStatutLit.get({id:this.mv.lit.id_lit});
+        this.mv.date_entree = moment(this.date).format();
+        this.mv.admission = this.ad;
+        this.mv.$save();
+        $window.location.href = '/bureau/#/mouvement/id/'+ $routeParams.id;
    };
   
 }])
 
-.controller('MouvementEditController', [ 'Mouvement', 'Lits', 'Ufs', '$routeParams', '$location',
-    function(Mouvement, Lits, Ufs, $routeParams, $location) {
+.controller('MouvementEditController', [ 'Mouvement', 'Lits', 'Ufs', '$routeParams', '$window',
+    function(Mouvement, Lits, Ufs, $routeParams, $window) {
         this.id_mouv = $routeParams.id;
         this.mv = Mouvement.get({id: this.id_mouv});
         this.lits = Lits.query();
         this.ufs = Ufs.query();
         this.formatDate = function(date){
-            console.log('date :'+ date);
-            console.log(moment(date).format('DD/MM/YYYY'));
             return moment(date).format('DD/MM/YYYY');
         };
         this.update = function() {
-            this.mv.date_entree = moment(this.date_entree).format();
-            this.mv.date_sortie = moment(this.date_sortie).format();
-            this.mv.admission = this.ad;
+            console.log(this.date_entree);
+            this.mv.date_entree = moment(this.mv.date_entree).format();
+            this.mv.date_sortie = moment(this.mv.date_sortie).format();
+            this.mv.admission = this.mv.admission;
             this.mv.$save();
-            $location.path("/mouvement/id/"+ this.iep);
+            $window.location.href = '/bureau/#/mouvement/id/'+ this.mv.admission.iep;
         };
     }
 ]);
 
 // MOUVEMENT
-angular.module('monApp').controller('LitsController', [ '$routeParams', 'Ufs',
-    function ($routeParams, Ufs) {
-        this.ufs = Ufs.query();
+angular.module('monApp').controller('LitsController', [ '$routeParams', '$window', 'Ufs', 'Lits','ChangerStatutLit',
+    function ($routeParams, $window, Ufs, Lits, ChangerStatutLit) {
+       this.ufs = Ufs.query();
        console.log(this.ufs);
         this.occupation = function (occupe) {
            if(occupe == false){
@@ -152,6 +156,10 @@ angular.module('monApp').controller('LitsController', [ '$routeParams', 'Ufs',
            }else{
                return 'busy';
            }
+        };
+        this.libererLit = function (id) {
+            ChangerStatutLit.get({id:id});
+            $window.location.reload();
         };
     }
 ]);

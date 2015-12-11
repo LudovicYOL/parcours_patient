@@ -11,12 +11,12 @@
    
     <table class="table table-condensed table-striped table-bordered" ng-repeat="uf in ctrl.ufs">
         <tr>
-           <th colspan="3">{{uf.nom}}</th>
+           <th colspan="4">{{uf.nom}}</th>
         </tr>
         <tr ng-repeat="lit in uf.lits">
             <td>{{lit.chambre}}</td>
             <td >Lit n°{{lit.id_lit}}</td>
-            <td class="{{ ctrl.occupation(lit.occupe) }}"></td>
+            <td class="occupation_marker {{ ctrl.occupation(lit.occupe) }}"><button class="btn btn-link" ng-click="ctrl.libererLit(lit.id_lit)"><span class="glyphicon glyphicon-refresh"></span></button></td>
         </tr>
         
      </table>

@@ -41,3 +41,24 @@ angular.module('monApp').factory('Ufs', ['$resource', function($resource) {
     return $resource('/bureau/webresources/generic/unitefonctionnelle/:id', { id : '@id'} );
     
 }]);
+
+// Cloture mouvement
+angular.module('monApp').factory('ClotureMouvement', ['$resource', function($resource) {
+        
+    return $resource('/bureau/webresources/generic/mouvement/cloture/:id', { id : '@id'} );
+    
+}]);
+
+// Changer statut lit
+angular.module('monApp').factory('ChangerStatutLit', ['$resource', function($resource) {
+        
+    return $resource('/bureau/webresources/generic/lit/changeStatut/:id', { id : '@id'} );
+    
+}]);
+
+//Update from file
+angular.module('monApp').factory('UpdateFromFile', ['$resource', function($resource) {
+        
+    return $resource('/bureau/webresources/generic/updateFromFile');
+    
+}]);

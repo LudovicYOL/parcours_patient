@@ -5,20 +5,23 @@
 <p> IEP : {{ ctrl.mv.admission.iep }}</p>
 <p> ID_MOUV : {{ ctrl.id_mouv }}</p>
 
-{{ ctrl.mv }}
+
 
 <div class="main_menu">
-   <button class='btn btn-primary pull-right'><a ng-href="#/mouvements/id/{{ ctrl.mv.admission.iep }}"> Retour </a><span class='glyphicon glyphicon-arrow-left'></span></button>
+   <button class='btn btn-primary pull-right'><a ng-href="#/mouvement/id/{{ ctrl.mv.admission.iep }}"> Retour </a><span class='glyphicon glyphicon-arrow-left'></span></button>
 </div>
 
 <div class="main_container">
     <div style='width:400px'>
         <form novalidate class="simple-form">
 
-            <label for='uf' class="control-label">UF</label><select class="form-control" ng-options="uf.id_uf+' - '+uf.nom for uf in ctrl.ufs" ng-model="ctrl.mv.uf"></select><br />  
-            <label for='ipp' class="control-label">Lit</label><select class="form-control" ng-options="lit.chambre+'- lit n°'+lit.id_lit for lit in ctrl.lits |filter:lit.occupe=='false'" ng-model="ctrl.mv.lit"></select><br />
-            <label for='ipp' class="control-label">Date entrée</label><input type="text" class="datepicker form-control" value="{{ctrl.formatDate(ctrl.mv.date_entree)}}" ng-model="ctrl.date_entree"><br/>{{ctrl.formatDate(ctrl.mv.date_entree)}}
-            <label for='ipp' class="control-label">Date sortie</label><input type="text" class="datepicker form-control" value="{{ctrl.mv.date_sortie}}" ng-model="ctrl.date_sortie"><br/>
+            <label for='uf' class="control-label">UF : {{ ctrl.mv.uf.nom }}</label>
+            <select class="form-control" ng-options="uf.id_uf+' - '+uf.nom for uf in ctrl.ufs" ng-model="ctrl.mv.uf">
+                
+            </select><br />  
+            <label for='ipp' class="control-label">Lit : {{ ctrl.mv.lit.chambre+'- lit n°'+ctrl.mv.lit.id_lit}}</label><select class="form-control" ng-options="lit.chambre+'- lit n°'+lit.id_lit for lit in ctrl.lits |filter:lit.occupe=='false'" ng-model="ctrl.mv.lit"></select><br />
+            <label for='ipp' class="control-label">Date entrée : {{ctrl.formatDate(ctrl.mv.date_entree)}}</label><input id="date_entree" type="text" class="datepicker form-control" ng-model="ctrl.mv.date_entree"><br/>
+            <label for='ipp' class="control-label">Date sortie : {{ctrl.formatDate(ctrl.mv.date_sortie)}} </label><input id="date_sortie" type="text" class="datepicker form-control" ng-model="ctrl.mv.date_sortie"><br/>
 
             <input class="form-control" type="submit" ng-click="ctrl.update()" value="Enregistrer mouvement" />
 
@@ -28,6 +31,7 @@
 
 <script>
     $(function() {
-      $( ".datepicker" ).datepicker({dateFormat: 'dd/mm/yy'});
+        console.log('caca');
+        $( ".datepicker" ).datepicker();
     });
 </script>
