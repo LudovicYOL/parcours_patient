@@ -379,7 +379,7 @@ public class Services {
          SAXBuilder builder = new SAXBuilder();
          try{
             //on liste et on parcours les fichiers pour trouver les .xml qui sont en ajout et en edit 
-            File repertoire = new File("C:\\Users\\areceveu");
+            File repertoire = new File("\\\\172.18.8.70\\temp\\PP_PAT_IN");// \\\\178.18.8.70\\temp
             System.out.println("new file");
             String [] listefichiers;
             int i;
@@ -430,6 +430,25 @@ public class Services {
                         System.out.println("admission modifiée");
                     }
                     
+                }
+                if(listefichiers[i].startsWith("mouv")){
+                    System.out.println("fichier new trouvé");
+                    Document doc = builder.build(""+repertoire+"\\"+listefichiers[i]);
+                    Element root = doc.getRootElement();
+                    Element admissionXML = root;
+                    int type=1;
+                    int ipp;
+                    int iep;
+                    ipp = parseInt(admissionXML.getChild("patient").getAttributeValue("ipp"));
+                    iep = parseInt(admissionXML.getAttributeValue("iep"));
+                    if(admissionXML.getChild("type").getText().startsWith("c"))
+                        type=3;
+                    if(admissionXML.getChild("type").getText().startsWith("h"))
+                        type=1;
+                    if(admissionXML.getChild("type").getText().startsWith("u"))
+                        type=2;
+                    newAdmission(ipp, type, iep);
+                    System.out.println("nouvelle admission ajoutée");
                 }
             }
             /* 
