@@ -78,14 +78,14 @@ public class test_bureau {
         // Admission
         serv.getAdmissionsFromFile();
         
-        List<Admission> res = serv.getAdmissionByIpp(105);
+        /*List<Admission> res = serv.getAdmissionByIpp(105);
         assert(!res.isEmpty());
         assert(res.size() == 1);
         
         Admission ad_test = serv.getAdmissionByIep(63);
         assertNotNull(ad_test);
         System.out.println("Admission par IEP : "+ ad_test);
-        
+        */
         // Lit
         Lit lit1 = serv.newLit("Chambre 1");
         Lit lit2 = serv.newLit("Chambre 2");
@@ -110,7 +110,7 @@ public class test_bureau {
         List<UniteFonctionnelle> res3 = serv.getAllUnitesFonctionnelles();
         assert(!res3.isEmpty());
         assert(res3.size()==2);
-        
+        /*
         //Mouvement
         Mouvement mv1 = serv.newMouvement(ad_test, lit1, uf1,new Date());
         //Mouvement mv2 = serv.newMouvement(ad2, lit4, uf2,new Date());
@@ -133,7 +133,7 @@ public class test_bureau {
         
         // Cloturer Mouvement
         //serv.clotureMouvement(mv1);
-        
+        */
         
         
         
