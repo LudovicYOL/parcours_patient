@@ -77,12 +77,12 @@ public class test_bureau {
         
         // Admission
         serv.getAdmissionsFromFile();
-        /*
-        List<Admission> res = serv.getAdmissionByIpp(1);
-        assert(!res.isEmpty());
-        assert(res.size() == 2);
         
-        Admission ad_test = serv.getAdmissionByIep(1);
+        List<Admission> res = serv.getAdmissionByIpp(105);
+        assert(!res.isEmpty());
+        assert(res.size() == 1);
+        
+        Admission ad_test = serv.getAdmissionByIep(63);
         assertNotNull(ad_test);
         System.out.println("Admission par IEP : "+ ad_test);
         
@@ -111,14 +111,19 @@ public class test_bureau {
         assert(!res3.isEmpty());
         assert(res3.size()==2);
         
-        /*Mouvement
-        Mouvement mv1 = serv.newMouvement(ad1, lit1, uf1,new Date());
-        Mouvement mv2 = serv.newMouvement(ad2, lit4, uf2,new Date());
-        Mouvement mv3 = serv.newMouvement(ad1, lit1, uf2,new Date());
+        //Mouvement
+        Mouvement mv1 = serv.newMouvement(ad_test, lit1, uf1,new Date());
+        //Mouvement mv2 = serv.newMouvement(ad2, lit4, uf2,new Date());
+        //Mouvement mv3 = serv.newMouvement(ad1, lit1, uf2,new Date());
         
-       List<Mouvement> mouvs = serv.getAllMouvements();
+        //une fois le lit affecté à un mouvement, le lit est occupé
+        assert(mv1.getLit().getOccupe()==true);
+        
+        assert(serv.getLitById(mv1.getLit().getId_lit()).getOccupe()==true);
+        
+        List<Mouvement> mouvs = serv.getAllMouvements();
         assert(!mouvs.isEmpty());
-        assert(mouvs.size() == 3);
+        assert(mouvs.size() == 1);
         
         // Liste mouvement selon admission
         List<Mouvement> mouvs_test = serv.getMouvementByIep(ad_test.getIep());
@@ -128,8 +133,8 @@ public class test_bureau {
         
         // Cloturer Mouvement
         Date date_cloture =  new Date();
-        serv.clotureMouvement(mv2, date_cloture);
-        */
+        serv.clotureMouvement(mv1, date_cloture);
+        
         
         
         

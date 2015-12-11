@@ -142,6 +142,15 @@ public class RestServices {
     public List<Lit> getLits() {
         return serv.getAllLits();
     }
+    
+    @POST
+    @Path("lit/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response editLit(Lit lit) {
+        serv.editLit(lit);
+        return Response.status(200).entity(lit).build();
+    }
+    
     /*//je foire
     @GET
     @Path("lit/{id}")

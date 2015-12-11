@@ -230,6 +230,12 @@ public class Services {
         em.getTransaction().commit();
         return l;
     }
+    public void editLit(Lit l){
+        em.getTransaction().begin();
+        em.merge(l);
+        em.getTransaction().commit();
+    }
+    
     public void updateLit(Lit l){
         em.getTransaction().begin();
         em.persist(l);
@@ -284,10 +290,10 @@ public class Services {
         else{m.setDate_sortie(date_entree);}
         
         m.setAdmission(ad);
-        lit.setOccupe(Boolean.TRUE);
         //em.persist(lit);
         m.setLit(lit);
-       
+        m.getLit().setOccupe(Boolean.TRUE);
+        System.out.println (" le lit "+lit+" ou "+m.getLit()+" est "+m.getLit().getOccupe()+ " et "+lit.getOccupe());
         m.setUf(uf);
         em.persist(m);
         em.getTransaction().commit();
