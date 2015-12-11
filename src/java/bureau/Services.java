@@ -320,8 +320,7 @@ public class Services {
          em.getTransaction().begin();
          Lit l = m.getLit();
          l.setOccupe(Boolean.FALSE);
-         em.persist(l);
-         em.persist(m);
+         em.merge(m);
          em.getTransaction().commit();
     }
     public void removeMouvement(int id_mouv) {
