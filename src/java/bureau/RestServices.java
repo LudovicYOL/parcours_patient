@@ -151,14 +151,15 @@ public class RestServices {
         return Response.status(200).entity(lit).build();
     }
     
-    /*//je foire
+    //je foire
     @GET
     @Path("lit/{id}")
     @Produces("application/json")
     public Lit getLitById(@PathParam("id") int id) {
         return serv.getLitById(id);
     }
-    */
+    
+    
     @GET
     @Path("mouvements")
     @Produces("application/json")
