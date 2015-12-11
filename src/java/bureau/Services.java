@@ -407,7 +407,6 @@ public class Services {
                         type=2;
                     newAdmission(ipp, type, iep);
                     System.out.println("nouvelle admission ajoutée");
-                    listefichiers[i].replace("new", "read");
                 }
                 if(listefichiers[i].startsWith("update")){
                     System.out.println("fichier en update trouvé");
