@@ -32,54 +32,6 @@ public class RestServices {
         serv = new Services(DatabaseUtils.fact());
     }
 
-    
-
-    @GET
-    @Path("crayons/{id}")
-    @Produces("application/json")
-    public Crayon getCrayons(@PathParam("id") int id) {
-        return serv.getCrayonsById(id);
-    }
-    
-    @GET
-    @Path("crayons")
-    @Produces("application/json")
-    public List<Crayon> getAllCrayons() {
-        return serv.getAllCrayons();
-    }
-
-    @GET
-    @Path("boites")
-    @Produces("application/json")
-    public List<Boite> getBoites() {
-        return serv.getAllBoites();
-    }
-    
-    @POST
-    @Path("crayons")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces("application/json")
-    public Crayon newCrayon(Crayon cr) {
-        serv.newCrayon(cr);
-        System.out.println("id:"+cr.getId());
-        return cr;
-    }
-    
-    @POST
-    @Path("crayons/{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response editCrayon(Crayon cr) {
-        serv.editCrayon(cr);
-        return Response.status(200).entity(cr).build();
-    }
-    
-    @DELETE
-    @Path("crayons/{id}")
-    public Response removeCrayon(@PathParam("id") int id) {
-        serv.removeCrayon(id);
-        return Response.status(200).build();
-    }
-
 
     
     @GET

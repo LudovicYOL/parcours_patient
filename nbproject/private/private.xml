@@ -8,14 +8,20 @@
             <file>file:/C:/Logiciel/git/parcours_patient/web/editMouvement.html</file>
             <file>file:/C:/Logiciel/git/parcours_patient/nbproject/build-impl.xml</file>
             <file>file:/C:/Logiciel/git/parcours_patient/web/occupationLits.html</file>
+            <file>file:/C:/Logiciel/git/parcours_patient/src/java/bureau/UniteFonctionnelle.java</file>
             <file>file:/C:/Logiciel/git/parcours_patient/web/editAdmission.html</file>
             <file>file:/C:/Logiciel/git/parcours_patient/src/java/bureau/RestServices.java</file>
             <file>file:/C:/Logiciel/git/parcours_patient/src/java/bureau/Services.java</file>
+            <file>file:/C:/Logiciel/git/parcours_patient/web/listeMouvement.html</file>
+            <file>file:/C:/Logiciel/git/parcours_patient/web/style.css</file>
+            <file>file:/C:/Logiciel/git/parcours_patient/test/test_lecture_fichier.java</file>
             <file>file:/C:/Logiciel/git/parcours_patient/web/services.js</file>
             <file>file:/C:/Logiciel/git/parcours_patient/src/java/bureau/Mouvement.java</file>
             <file>file:/C:/Logiciel/git/parcours_patient/web/newMouvement.html</file>
             <file>file:/C:/Logiciel/git/parcours_patient/web/controllers.js</file>
+            <file>file:/C:/Logiciel/git/parcours_patient/web/moment.js</file>
             <file>file:/C:/Logiciel/git/parcours_patient/web/app.js</file>
+            <file>file:/C:/Logiciel/git/parcours_patient/test/test_creation_manuelle.java</file>
         </group>
     </open-files>
 </project-private>
