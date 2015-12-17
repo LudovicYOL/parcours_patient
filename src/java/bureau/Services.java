@@ -341,6 +341,18 @@ public class Services {
                         editAdmission(ad);
                         System.out.println("admission modifiée");
                     }
+                    String date_sortie = admissionXML.getChild("date_sortie").getValue();
+                    DateFormat format = new SimpleDateFormat("YYYY-MM-DD", Locale.ENGLISH);
+                    Date date_s = format.parse(date_sortie);
+                    String date_entree = admissionXML.getChild("date_sortie").getValue();
+                    Date date_e = format.parse(date_entree);
+                    List<Mouvement> listemouv = getMouvementByIep(iep);
+                    if(listemouv!=null){
+                        Mouvement mouv = listemouv.get(listemouv.size());
+                        updateMouvement(mouv, mouv.getAdmission(), mouv.getLit(), mouv.getUf(), date_e, date_s);
+                    }else{
+                        System.out.println("pas de mouvement pour cette admission");
+                    }
                     
                 }
                 if(listefichiers[i].startsWith("mouv")){
@@ -370,26 +382,7 @@ public class Services {
                     newMouvement(getAdmissionByIep(iep), lit ,getUniteFontionnelleByNom(service), date);
                     System.out.println("nouvelle admission ajoutée");
                 }
-            }
-            /* 
-            Document doc = builder.build("C:\\Users\\areceveu\\admission.xml");
-            Element root = doc.getRootElement();
-            List<Element> admissions = root.getChildren("admission");
-            int type=1;
-            int ipp;
-            int iep;
-            for(Element admissionXML : admissions){
-                ipp = parseInt(admissionXML.getChild("patient").getAttributeValue("ipp"));
-                iep = parseInt(admissionXML.getAttributeValue("iep"));
-                if(admissionXML.getChild("type").getText().startsWith("c"))
-                    type=3;
-                if(admissionXML.getChild("type").getText().startsWith("h"))
-                    type=1;
-                if(admissionXML.getChild("type").getText().startsWith("u"))
-                    type=2;
-                newAdmission(ipp, type, iep);
-            }*/
-            
+            }            
          }catch(Exception e){
              System.out.println("Erreur de lecture du fichier d'admission");
          }
